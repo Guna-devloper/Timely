@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import TimeTableChart from "./components/TimeTableChart";
 import Timetable from "./pages/Timetable";
+import AutoTimetable from "./pages/Automatic";
 
 function App() {
   return (
@@ -38,7 +39,7 @@ function MainLayout() {
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/timetablechart" element={<TimeTableChart />} />
-          
+          <Route path="/auto-timetable" element={<AutoTimetable />} />
           <Route path="/timetable" element={<Timetable/>} />
 
         </Routes>

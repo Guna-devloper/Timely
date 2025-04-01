@@ -34,21 +34,17 @@ function TimeTableChart() {
         const autoSnapshot = await getDocs(collection(db, "autoschedule"));
         const autoData = autoSnapshot.docs.map((doc) => {
           const data = doc.data();
+          
+          console.log(`✅ Auto Timetable for ${data.day}:`, data); // Debugging line
 
-          // Extract and format auto-schedule data correctly
-          const timetable = data.timetable || {};
-          const formattedSlots = Object.keys(timetable).map((day) => ({
-            day: day,
-            slots: timetable[day] || ["Free", "Free", "Free", "Free", "Free", "Free"],
-          }));
-
-          return formattedSlots;
+          return {
+            id: doc.id,
+            day: data.day || "Unknown Day",
+            slots: Array.isArray(data.slots) && data.slots.length > 0 ? data.slots : ["Free", "Free", "Free", "Free", "Free", "Free"],
+          };
         });
 
-        // Flatten the data to match the timetable structure
-        const flattenedAutoTimetable = autoData.flat();
-
-        setAutoTimetable(flattenedAutoTimetable);
+        setAutoTimetable(autoData);
       } catch (error) {
         console.error("❌ Error fetching timetable:", error);
       } finally {

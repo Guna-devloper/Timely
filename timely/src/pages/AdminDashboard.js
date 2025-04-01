@@ -5,12 +5,14 @@ import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
+import { useNavigate } from "react-router-dom";
 
 function AdminDashboard() {
   const [timetable, setTimetable] = useState([]);
   const [newEntry, setNewEntry] = useState({ day: "", time: "", subject: "", faculty: "", room: "" });
   const [announcements, setAnnouncements] = useState([]);
   const [newAnnouncement, setNewAnnouncement] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Real-time updates for timetable
@@ -147,6 +149,9 @@ function AdminDashboard() {
           />
         </Form.Group>
         <Button onClick={addTimetableEntry} className="mt-2">Add Entry</Button>
+        <Button variant="success" onClick={() => navigate("/auto-timetable")}>
+          ⚡ AutoSchedule
+        </Button>
       </Form>
 
       <Table striped bordered hover className="mt-4">
@@ -161,21 +166,22 @@ function AdminDashboard() {
           </tr>
         </thead>
         <tbody>
-          {timetable.map((entry) =>
-            entry.slots.map((slot, index) => (
-              <tr key={`${entry.id}-${index}`}>
-                <td>{entry.day}</td>
-                <td>{slot.time}</td>
-                <td>{slot.subject}</td>
-                <td>{slot.faculty}</td>
-                <td>{slot.room}</td>
-                <td>
-                  <Button variant="danger" onClick={() => deleteTimetableEntry(entry.id, index)}>Delete</Button>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
+  {timetable.map((entry) =>
+    (entry.slots || []).map((slot, index) => (
+      <tr key={`${entry.id}-${index}`}>
+        <td>{entry.day}</td>
+        <td>{slot.time}</td>
+        <td>{slot.subject}</td>
+        <td>{slot.faculty}</td>
+        <td>{slot.room}</td>
+        <td>
+          <Button variant="danger" onClick={() => deleteTimetableEntry(entry.id, index)}>Delete</Button>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
+
       </Table>
 
       <h3 className="mt-4">Announcements</h3>
