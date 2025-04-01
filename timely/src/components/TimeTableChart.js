@@ -59,10 +59,19 @@ function TimeTableChart() {
     fetchTimetables();
   }, []);
 
-  // 🔍 Search Functionality
+  // 🔍 Search Functionality (Now Works!)
   const handleSearch = (e) => {
     setSearch(e.target.value.toLowerCase());
   };
+
+  // Filter tables based on search input
+  const filteredAdminTimetable = adminTimetable.filter((entry) =>
+    entry.day.toLowerCase().includes(search)
+  );
+
+  const filteredAutoTimetable = autoTimetable.filter((entry) =>
+    entry.day.toLowerCase().includes(search)
+  );
 
   // Define the periods
   const periods = ["Period 1", "Period 2", "Period 3", "Period 4", "Period 5", "Period 6"];
@@ -75,7 +84,7 @@ function TimeTableChart() {
       <div className="d-flex justify-content-between align-items-center my-3">
         <Form.Control
           type="text"
-          placeholder="🔍 Search timetable..."
+          placeholder="🔍 Search by day (e.g., Monday, Tuesday)..."
           value={search}
           onChange={handleSearch}
           className="search-bar"
@@ -103,8 +112,8 @@ function TimeTableChart() {
               </tr>
             </thead>
             <tbody>
-              {adminTimetable.length > 0 ? (
-                adminTimetable.map((dayEntry, index) =>
+              {filteredAdminTimetable.length > 0 ? (
+                filteredAdminTimetable.map((dayEntry, index) =>
                   dayEntry.slots.map((slot, idx) => (
                     <tr key={`${index}-${idx}`}>
                       <td>{dayEntry.day}</td>
@@ -118,7 +127,7 @@ function TimeTableChart() {
               ) : (
                 <tr>
                   <td colSpan="5" className="text-center text-warning">
-                    ⚠️ No admin timetable data available.
+                    ⚠️ No matching results.
                   </td>
                 </tr>
               )}
@@ -137,8 +146,8 @@ function TimeTableChart() {
               </tr>
             </thead>
             <tbody>
-              {autoTimetable.length > 0 ? (
-                autoTimetable.map((entry, index) => (
+              {filteredAutoTimetable.length > 0 ? (
+                filteredAutoTimetable.map((entry, index) => (
                   <tr key={index}>
                     <td>{entry.day}</td>
                     {periods.map((_, idx) => (
@@ -149,7 +158,7 @@ function TimeTableChart() {
               ) : (
                 <tr>
                   <td colSpan={periods.length + 1} className="text-center text-warning">
-                    ⚠️ No auto-generated timetable available.
+                    ⚠️ No matching results.
                   </td>
                 </tr>
               )}
