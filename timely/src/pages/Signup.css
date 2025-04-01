@@ -1,0 +1,50 @@
+/* Center the signup form */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Signup card */
+  .signup-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Brand Name */
+  .brand-name {
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  /* Input Fields */
+  .form-control {
+    border-radius: 5px;
+  }
+  
+  /* Signup Button */
+  .btn-primary {
+    background: #007bff;
+    border: none;
+    transition: background 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background: #0056b3;
+  }
+  
+  /* Login link */
+  .login-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  

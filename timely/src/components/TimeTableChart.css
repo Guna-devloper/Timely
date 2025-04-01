@@ -1,0 +1,43 @@
+.timetable-container {
+    max-width: 90%;
+    margin: auto;
+  }
+  
+  .search-bar {
+    width: 50%;
+    transition: 0.3s;
+  }
+  
+  .search-bar:focus {
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+  }
+  
+  .timetable-table {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .timetable-table tbody tr:hover {
+    background-color: rgba(0, 0, 255, 0.1);
+    cursor: pointer;
+  }
+  
+  .timetable-card {
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .timetable-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-day {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .card-slot {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
